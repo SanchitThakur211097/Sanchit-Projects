@@ -1,0 +1,95 @@
+
+<html>
+<style>
+
+iframe{
+height:700px;
+width:1335px;
+background-color:#a3a3c2;
+text-color:white;
+border:5px solid green;
+}
+.button:hover
+{
+background: linear-gradient(to right, red 50%, blue 50%);
+background-size: 200% 100%;
+background-position:right bottom;
+transition: background 1s ease-out;
+
+}
+marquee{
+font-variant:small-caps;
+}
+.button {
+	
+    background-color: #4CAF50;
+    border:1px solid white;
+    border-radius: 8px;
+    color:white;
+    padding: 18px 35px;
+    text-align:center;
+    text-decoration:none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	padding-left:80px;
+	background: linear-gradient(to right, red 50%, blue 50%);
+background-size: 200% 100%;
+background-position:center bottom;
+font-family:comic sans MS;
+}
+#pad{
+padding-left:30px;
+display:inline-block;
+}
+#pad1{
+padding-left:250px;
+display:inline-block;
+}
+#pad2{
+padding-left:150px;
+display:inline-block;
+}
+.bod{
+font-family:comic sans MS;
+}
+</style>
+<head>
+<title>Project</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body style="background-image:url('cool.jpg')" class="bod">
+<center><h1>Welcome to <span style="color:white">Integrated Project-II</span></h1></center>
+<marquee><h1>Welcome to GA<span style="color:white">ME PLATF</span>ORM</h1></marquee>
+<br><br>
+<center><h2>SNAKE GAME</h2></center>
+<div id="pad">
+<button class="button" onclick="myFunc()"  style="padding-left:30px" title="click here to see the code">CODE</button></div>
+<div id="pad1"><button class="button" id="pad" onclick="myFunc1()" style=" padding-left:30px" title="click here to see output">RUN CODE</button></div>
+ <div id="pad2"><a href="c.html" style="text-decoration:none;" ><button class="button"style=" padding-left:30px;" title="click here to close code">CLOSE CODE</button></a></div>
+  <!--<div id="pad2"></div></a><button class="button"  onclick="myFunc2()" style=" padding-left:30px;" title="click here to close code">HELP</button></div>-->
+</div>
+<div id="code"></div>
+<div id="executive"></div>
+
+<!--<iframe src="project.cpp"></iframe>--->
+<script type="text/javascript">
+function myFunc(){
+ $("#code").append("<iframe src='i.cpp' ></iframe>");
+ 
+}
+function myFunc2(){
+ $("#code").append("<iframe src='a.html' ></iframe>");
+ 
+}
+
+
+
+function myFunc1(){
+$("#executive").append("<iframe src='i.exe' ></iframe>");
+}
+</script>
+</body>
+
+</html>

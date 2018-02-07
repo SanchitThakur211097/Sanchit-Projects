@@ -1,0 +1,190 @@
+<html>
+<head>
+<title>create game</title>
+<style>
+body
+{
+font-size:15px;
+color:#222;
+line-height:25px;
+font-family:comic sans MS;
+}
+.df {
+    min-height: 100px;
+    width: 100%;
+    margin-top: -104px;
+}
+
+.bkTitle
+{
+float:left;
+margin-bottom:10px;
+margin-top:-5px;
+}
+.df,.myF_lft,.mySubHd
+{
+float:left
+}
+#myContentHolder{background-color:#F1F1F1}
+.df{min-height:100px;width:100%}
+.myIframecontainer,.myTextareacontainer{float:left;height: 568px;width:50%}
+.myIframe,.myTextarea{height:100%;padding:15px}
+.mySubHd{width:10%;height:30px}
+.myF_rgt{float:right;padding-right:15px}
+#myIframewrapper,#myTextareawrapper{background-color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
+float:left;height:470px;margin-bottom:25px;width:100%}
+#myTextareaCode{background-color:#fff;border:none;font-family:consolas,"courier new",monospace;font-size:15px;height:100%;
+padding:8px;resize:none;width:100%;float:left}.vkHeader{float:left;height:25px;margin-bottom:10px;width:100%}
+#iframeResult,#iframeSource{background-color:#fff;height:100%;width:100%}
+.btnRunCode{background-color:black;border:none;border-radius:2px;color:#fff;cursor:pointer;padding:10px;padding-right:10px;padding-left:10px;transition:background-color .3s ease 0s}
+.btnRunCode:hover{background-color:grey}</style>
+
+</head>
+<body background="black">
+
+<center><img src="create.jpg" height="100" width="100" style="    width: 1366;
+    height: 300;
+    margin-left: -7px;
+    margin-top: -36px;"></center>
+	<h2><p id="print" style="    margin-top: -51px;"></p></h2>
+<p id="demo"></p>
+<p id="demo1"></p>
+<p id="result"></p>
+<div class="entry-content">
+<div id="vkWrapper">
+<div id="myHead" class="df">
+<center>
+<ins class="adsby" style="display:inline-block;width:728px;height:200px"></ins>
+</center> </div>
+<div class="df" id="myContentHolder">
+<div class="myTextareacontainer">
+<div class="myTextarea">
+<div class="vkHeader">
+<div class="myF_lft">Edit This Code : </div>
+<div class="myF_rgt"><button class="btnRunCode" type="button" onclick="runCode()">See Result:</button> </div>
+</div>
+<div id="myTextareawrapper">
+<textarea class="code_input"  id="myTextareaCode" >
+<html>
+<head>
+
+</head>
+<body>
+<!--enter you code-->
+
+
+
+</body>
+</html>
+</textarea>
+</div>
+</div>
+</div>
+<div class="myIframecontainer">
+<div class="myIframe">
+<div class="vkHeader">
+<div class="myF_lft">Result : <button  class="btnRunCode" onclick="myFunctionnewgame()" style="margin-left: 184px;">see game</button>
+ <button  class="btnRunCode" onclick="myFunctionoldgame()" style="margin-left: 225px;">Old Games</button></div>
+</div>
+<div id="myIframewrapper">
+</div>
+</div>
+</div>
+</div>
+</div> <style type="text/css">.td-main-content-wrap .td-container{width:100%!important;}</style>
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+
+        function runCode_1() {
+          
+
+            var text = document.getElementById("myTextareaCode").value;
+           
+            var ifr = document.createElement("iframe");
+            ifr.setAttribute("frameborder", "0");
+            ifr.setAttribute("id", "iframeResult");
+            document.getElementById("myIframewrapper").innerHTML = "";
+            document.getElementById("myIframewrapper").appendChild(ifr);
+            var ifrw = (ifr.contentWindow) ? ifr.contentWindow : (ifr.contentDocument.document) ? ifr.contentDocument.document : ifr.contentDocument;
+            ifrw.document.open();
+            ifrw.document.write(text);
+            ifrw.document.close();
+            if (ifrw.document.body && !ifrw.document.body.isContentEditable) {
+                ifrw.document.body.contentEditable = true;
+                ifrw.document.body.contentEditable = false;
+            }
+        }
+runCode_1();
+
+function runCode() {
+          
+
+            var text = document.getElementById("myTextareaCode").value;
+		
+            
+            var ifr = document.createElement("iframe");
+            ifr.setAttribute("frameborder", "0");
+            ifr.setAttribute("id", "iframeResult");
+            document.getElementById("myIframewrapper").innerHTML = "";
+            document.getElementById("myIframewrapper").appendChild(ifr);
+            var ifrw = (ifr.contentWindow) ? ifr.contentWindow : (ifr.contentDocument.document) ? ifr.contentDocument.document : ifr.contentDocument;
+            ifrw.document.open();
+            ifrw.document.write(text);
+            ifrw.document.close();
+            if (ifrw.document.body && !ifrw.document.body.isContentEditable) {
+                ifrw.document.body.contentEditable = true;
+                ifrw.document.body.contentEditable = false;
+            }
+        }
+
+       
+    </script></p>
+</div>
+<html>
+<body>
+
+
+<script>
+var i=1;
+var a;
+function myFunctionnewgame() {
+
+    
+	 if(typeof(Storage) !== "undefined") {
+        if (localStorage.clickcount) {
+            localStorage.clickcount = Number(localStorage.clickcount)+1;
+        } else {
+            localStorage.clickcount = 1;
+        }
+        document.getElementById("result").innerHTML = "You have clicked the button " + localStorage.clickcount + " time(s).";
+		    var str = "open "+localStorage.clickcount+".html";
+    var r = str.link((localStorage.clickcount)+".html");
+	document.getElementById("demo").innerHTML = r;
+    }
+
+
+}
+var temp;
+temp=localStorage.clickcount;
+temp++;
+document.getElementById("print").innerHTML="please save file as "+temp+".html";
+function myFunctionoldgame()
+{
+var temp1=0;
+var i;
+temp1=localStorage.clickcount;
+for(i=1;i<=temp1;i++)
+{
+   var str = "open "+i+".html";
+   var r1 = str.link(i+".html");
+   document.write(r1+"<br>");
+}
+}
+</script>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<html>
+<head>
+	<title>Snakes and ladder game</title>
+	<script type="text/javascript">
+		var snakes=new Array([95,76],[55,46],[58,38],[36,5]);
+		var ladders=new Array([12,33],[48,69],[74,94],[57,83]);
+		var playersteps;
+		
+		//draws the game board
+		function draw(num)
+		{
+			var str="<table border=\"1\" bgcolor=\"#FFF6BF\">";
+			var x=num*num,y;
+			for(i=1;i<=num;i++)
+			{
+				str+="<tr height=\"70\">";
+				if(num%2==0)
+				{
+					if(i%2!=0)
+					{
+						x=x-num+1;
+						for(j=0;j<num;j++,x++)
+						{
+							str+="<td width=\"70\" align=\"center\" id=\""+x+"\">"+x+"</td>";
+						}
+					}
+					else
+					{
+						x=x-num-1;
+						for(j=0;j<num;j++,x--)
+						{
+							str+="<td width=\"70\" align=\"center\" id=\""+x+"\">"+x+"</td>";
+						}
+					}
+				}
+				else
+				{
+					if(i%2!=0)
+					{
+						if(i!=1)
+						{
+							x=x-num-1;
+						}
+						for(j=0;j<num;j++,x--)
+							str+="<td width=\"70\" align=\"center\" id=\""+x+"\">"+x+"</td>";
+					}
+					else
+					{
+						x=x-num+1;
+						for(j=0;j<num;j++,x++)
+							str+="<td width=\"70\" align=\"center\" id=\""+x+"\">"+x+"</td>";
+					}
+				}
+				str+="</tr>";
+			}
+			str+="</table>";
+			
+			document.getElementById("board").innerHTML=str;
+			document.getElementById(num*num).innerHTML="<img src=\"star.gif\" width=\"70\" height=\"70\"></img>";
+			
+		}
+		
+		//buttons based on the total number of players.
+		function loadbuttons()
+		{
+			totalplayers=document.snl.players.value;
+			if(isNaN(totalplayers))
+			{
+				alert("Invalid input.");
+				return;
+			}
+			if(totalplayers>4)
+			{
+				alert("Maximum 4 players can play.");
+				return;
+			}
+			str=" ";
+			for(i=0;i<totalplayers;i++)
+			{	
+				if(i==0)
+					str+="<img src=\"coin"+(i+1)+".gif\"></img><input type=\"button\" value=\"player "+(i+1)+"\" id=\"btn"+i+"\" onclick=\"startplay(10,"+i+")\"><br/>";
+				else
+					str+="<img src=\"coin"+(i+1)+".gif\"></img><input type=\"button\" value=\"player "+(i+1)+"\" id=\"btn"+i+"\" onclick=\"startplay(10,"+i+")\" disabled=\"true\"><br/>";
+			}
+			document.getElementById("playerbtn").innerHTML =str;
+			playersteps=new Array(totalplayers);
+			for(i=0;i<totalplayers;i++) 
+				playersteps[i]=0;
+			document.getElementById("okbtn").disabled=true;
+				
+		}
+		
+		// working of a dice.
+		function rolldice()
+		{
+			var t=Math.floor((Math.random() * 10));
+			dice=(t%6)+1;
+			document.getElementById("dice").innerHTML ="<img src=\"dice"+dice+".gif\" width=\"50\" height=\"50\" ></img>";
+		}
+		
+		//the main function which is used to play the game executed by each player button.
+		function startplay(num,playernum)
+		{
+		console.log(num*num);
+			rolldice();
+			oldstep=playersteps[playernum];
+			playersteps[playernum]+=dice;
+			
+			//To enable the next players button
+			document.getElementById("btn"+playernum).disabled=true;
+			chk=-1;
+			i=playernum;
+			do
+			{
+				i++;
+				if(i==playersteps.length)
+					i=0;
+				if(playersteps[i]>=0)
+				{
+					document.getElementById("btn"+i).disabled=false;
+					break;
+				}
+				else
+					document.getElementById("btn"+i).disabled=true;
+			}while(i!=playernum);
+			
+			//Loop to handle the execution if the block reached is a ladder.
+			for(i=0;i<ladders.length;i++)
+			{
+				if(playersteps[playernum]==ladders[i][0])
+				{
+					prevblock=playersteps[playernum];
+					playersteps[playernum]=ladders[i][1];
+					alert("Player"+(playernum+1)+": Climbed to block-"+playersteps[playernum]+" from block-"+prevblock);
+					break;
+				}
+			}
+			
+			//Loop to handle the execution if the block reached is a snake.
+			for(i=0;i<snakes.length;i++)
+			{
+				if(playersteps[playernum]==snakes[i][0])
+				{
+					prevblock=playersteps[playernum];
+					playersteps[playernum]=snakes[i][1];
+					alert("Player"+(playernum+1)+": Eaten by snake to block-"+playersteps[playernum]+" from block-"+prevblock);
+					break;
+				}
+			}
+			
+			//Updating the board based on the players position
+			if(playersteps[playernum]<(num*num))
+			{
+				if(oldstep!=0)
+				{
+					str=oldstep;
+					for(i=0;i<playersteps.length;i++)
+					{
+						if(playersteps[i]==oldstep)
+							str+="<img src=\"coin"+(i+1)+".gif\"></img>"
+					}
+					document.getElementById(oldstep).innerHTML=str;
+				}
+				str=playersteps[playernum];
+				for(i=0;i<playersteps.length;i++)
+				{
+					if(playersteps[i]==playersteps[playernum])
+						str+="<img src=\"coin"+(i+1)+".gif\"></img>"
+				}
+				document.getElementById(playersteps[playernum]).innerHTML=str;
+			}
+			else if(playersteps[playernum]==(num*num))
+			{
+				alert("Congrats: Player"+(playernum+1)+" Won.");
+				draw(10);
+				document.getElementById("playerbtn").innerHTML ="";
+				document.getElementById("players").value ="1";
+				document.getElementById("dice").innerHTML ="";
+				document.getElementById("okbtn").disabled=false;
+			}
+			else
+				playersteps[playernum]=oldstep;
+		}
+		
+	</script>
+	<style type="text/css">
+		#s1{
+			position: absolute;
+			left: 42%;
+			top: 12%;
+		}
+		#s2{
+			position: absolute;
+			left: 57%;
+			top: 60%;
+		}
+		#s3{
+			position: absolute;
+			left: 39.5%;
+			top: 54%;
+		}
+		#s4{
+    position: absolute;
+    left: 47.5%;
+    top:81%;
+		}
+		#l1{
+			position: absolute;
+			left: 27%;
+			top: 47%;
+		}
+		#l2{
+			position: absolute;
+			left: 31.25%;
+			top: 7%;
+		}
+		#l3{
+			    position: absolute;
+				left: 24%;
+				top: 79.5%;
+		}
+		#l4{
+    position: absolute;
+    left: 55%;
+    top: 28.5%;
+    transform: rotate(20deg);
+		}
+		td{
+			font-size:20px;
+		}
+	</style>
+</head>
+<body onload="draw(10)" bgcolor="#8AB8E6">
+	<center>
+	<h2>Snakes and ladder game</h2>	
+	
+	<table>
+		<form name="snl">
+		<tr>
+			<td><div id="board"></div></td>
+			<td width="71px">
+				<div id="playerbtn"></div>
+			</td>
+			<td width="50px" height="50px"><div id="dice"></div></td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center"><br/>Total Players:
+				<input type="text" value="1" name="players" id="players" size="1" maxlength="1">
+				<input type="button" value="OK" onclick="loadbuttons()" id="okbtn">
+			</td>
+		</tr>
+		</form>
+	</table>
+	</center>
+	<div id="s1">
+	<img src="snake1.gif"></img>
+	</div>
+	<div id="s2">
+	<img src="snake2.gif" width="105" height="165"></img>
+	</div>
+	<div id="s3">
+	<img src="snake3.gif"></img>
+	</div>
+	<div id="s4">
+	<img src="snake4.png" width="105" height="200"></img>
+	</div>
+	<div id="l1">
+	<img src="ladder1.gif"></img>
+	</div>
+	<div id="l2">
+	<img src="ladder2.gif"></img>
+	</div>
+	<div id="l3">
+	<img src="ladder3.gif"></img>
+	</div>
+		<div id="l4">
+	<img src="ladder4.gif" width="50" height="200" ></img>
+	</div>
+</body>
+</html>

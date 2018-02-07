@@ -1,0 +1,106 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="game.css">
+
+</head>
+<body onload="fn3()" style="background-image:url('12.jpg')">
+<img src="123.gif" height=100 width=100>
+<img src="10.gif"height=100 width=100>
+<div class="we">
+<div class="as">
+<marquee direction="down" height=500 scrollamount=20 behavior="alternate" id="marque">
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100>
+</marquee>
+<div>
+
+<div class="as1">
+<marquee direction="down" height=495 scrollamount=20 behavior="alternate" id="marque1">>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100 ></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100 ></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100 ><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100>
+</marquee>
+<div>
+<div class="as2">
+<marquee direction="down" height=495 scrollamount=20 behavior="alternate" id="marque2">>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100><br>
+<p onclick="myfunction()"><img src="1.png" height=100 width=100></p><br>
+<p onclick="fn()"><img src="before.png"height=100 width=100>
+</marquee>
+<div>
+<div class="op">
+<marquee direction="down" height=502 scrollamount=20><img src="giphy .gif"height=100 width=100></marquee>
+</div>
+<div class="op1">
+<marquee direction="up" height=502 scrollamount=20><img src="giphy .gif" height=100 width=100></marquee>
+</div>
+</div><br><br>
+<div class="lp">
+<button style="font-size:24px; background-color:green; color:white;"><p id="demo"></p></button><br>
+<button style="font-size:24px; background-color:green; color:white;" onclick="fn()" id="demo1">stop</button><br>
+<button style="font-size:24px; background-color:green; color:white;" onclick="fn1()">start</button><br>
+<button style="font-size:24px; background-color:green; color:white;"><p id="demo3"></p></button><br>
+</div>
+<script>
+ var count=0;
+ var g=0;
+ var h=0;
+function myfunction()
+{
+if(g==0)
+{
+count=count+10;
+document.getElementById("demo").innerHTML="Score="+count;
+
+}
+
+}
+function fn()
+{
+document.getElementById("marque").stop();
+document.getElementById("marque1").stop();
+document.getElementById("marque2").stop();
+document.getElementById("demo1").innerHTML="GAME OVER";
+ g=-1;
+}
+function fn3()
+{
+document.getElementById("marque").stop();
+document.getElementById("marque1").stop();
+document.getElementById("marque2").stop();
+document.getElementById("demo1").innerHTML="stop";
+g=-1;
+}
+function fn1()
+{
+
+document.getElementById("marque").start();
+document.getElementById("marque1").start();
+document.getElementById("marque2").start();
+document.getElementById("demo1").innerHTML="stop";
+g=0;
+h=count;
+document.getElementById("demo3").innerHTML="Previous<br> Score="+h;
+count=0;
+document.getElementById("demo").innerHTML="Score="+count;
+}
+</script>
+</body>
+</html>
